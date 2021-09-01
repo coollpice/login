@@ -52,6 +52,17 @@ public class SessionManager {
 
     }
 
+    /**
+     * 세션 만료 시키기
+     */
+    public void clearSession(HttpServletRequest request) {
+        Cookie sessionCookie = findCookie(request, SESSION_COOKIE_NAME);
+
+        if (sessionCookie != null) {
+            sessionStore.remove(sessionCookie.getValue());
+        }
+    }
+
     public Cookie findCookie(HttpServletRequest request , String cookieName) {
 
         if (request.getCookies() == null) {
